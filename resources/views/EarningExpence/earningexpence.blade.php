@@ -58,6 +58,9 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex justify-content-between align-items-center">
                             <h3 class="m-0 font-weight-bold text-primary">Earnings</h3>
+                            <div style="margin-left: 150px; margin-top:10px" class="totalpayment">
+    <h2>Total Earning = {{ $totalearning }}</h2>
+</div>
                             <ul class="navbar-nav ml-auto">
                                 <li>
                                     <form action="{{ route('Expence') }}" method="GET">

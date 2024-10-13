@@ -57,28 +57,12 @@
 
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                            <h3 class="m-0 font-weight-bold text-primary">Earnings</h3>
-                            <ul class="navbar-nav ml-auto">
-                                <li>
-                                    <form action="{{ route('Expence') }}" method="GET">
-                                        <button type="submit" class="btn btn-danger">
-                                            View Expense
-                                        </button>
-                                    </form>
+                            <h3 class="m-0 font-weight-bold text-primary">Expence</h3>
 
-                                </li>
-                            </ul>
-                            <div class="navbar-nav m">
-                                <li class="nav-item dropdown no-arrow mx-1">
-                                    <button class="btn btn-secondary" data-toggle="modal" data-target="#addEarningModal">
-                                        Search Expence
-                                    </button>
-                                </li>
-                            </div>
                             <div class="navbar-nav m">
                                 <li class="nav-item dropdown no-arrow mx-1">
                                     <button class="btn btn-primary" data-toggle="modal" data-target="#addEarningModal">
-                                        Add Earning
+                                        Add Expence
                                     </button>
                                 </li>
                             </div>
@@ -89,7 +73,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Area of earning</th>
+                                            <th>Area of expence</th>
                                             <th>Amount</th>
                                             <th>Month</th>
                                             <th>Actions</th> <!-- New column for actions -->
@@ -97,24 +81,24 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Area of earning</th>
+                                        <th>Area of expence</th>
                                             <th>Amount</th>
                                             <th>Month</th>
                                             <th>Actions</th> <!-- New column for actions -->
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @foreach ($earnings as $earning)
+                                        @foreach ($expence as $expence)
                                         <tr>
-                                            <td>{{ $earning->area_of_earning }}</td>
-                                            <td>{{ $earning->amount }}</td>
-                                            <td>{{ date('F', mktime(0, 0, 0, $earning->month_number, 1)) }}</td>
+                                            <td>{{ $expence->area_of_expence }}</td>
+                                            <td>{{ $expence->amount }}</td>
+                                            <td>{{ date('F', mktime(0, 0, 0, $expence->month, 1)) }}</td>
                                             <td>
                                                 <div style="margin-left: 10px;">
-                                                    <a href="{{ route('Editearning', $earning->id) }}"
+                                                    <a
                                                         class="btn btn-primary btn-sm">Edit</a>
 
-                                                    <form action="{{ route('Deleteearning', $earning->id) }}"
+                                                    <form 
                                                         method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
@@ -155,31 +139,31 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="earningForm" action="{{ route('Addearning') }}" method="POST" novalidate>
+                    <form id="earningForm" action="{{ route('Addexpence') }}" method="POST" novalidate>
                         @csrf
                         <div id="formFields">
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    <label for="earningName">Area of Earnings</label>
-                                    <input type="text" class="form-control" name="earningName[]"
-                                        placeholder="Enter Earning Name" required>
-                                    @error('earningName.*')
+                                    <label for="earningName">Area of Expence</label>
+                                    <input type="text" class="form-control" name="expenceName[]"
+                                        placeholder="Enter Expence Name" required>
+                                    @error('expenceName.*')
                                     <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="form-group col-md-4">
                                     <label for="earningAmount">Amount</label>
-                                    <input type="number" class="form-control" name="earningAmount[]"
+                                    <input type="number" class="form-control" name="expenceAmount[]"
                                         placeholder="Enter Amount" required>
-                                    @error('earningAmount.*')
+                                    @error('expenceAmount.*')
                                     <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="form-group col-md-4">
-                                    <label for="earningMonth">Month</label>
-                                    <select name="earningMonth[]" class="form-control" required>
+                                    <label for="expenceMonth">Month</label>
+                                    <select name="expenceMonth[]" class="form-control" required>
                                         <option value="">Select a month</option>
                                         <option value="1">January</option>
                                         <option value="2">February</option>
@@ -194,7 +178,7 @@
                                         <option value="11">November</option>
                                         <option value="12">December</option>
                                     </select>
-                                    @error('earningMonth.*')
+                                    @error('expenceMonth.*')
                                     <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -202,9 +186,6 @@
                         </div>
 
                         <button type="button" class="btn btn-secondary mb-3" id="addMoreBtn">Add More</button>
-
-
-
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Save Earnings</button>
@@ -241,16 +222,16 @@
             newFields.className = 'form-row';
             newFields.innerHTML = `
         <div class="form-group col-md-4">
-            <label for="earningName">Area of Earnings</label>
-            <input type="text" class="form-control" name="earningName[]" placeholder="Enter Earning Name" required>
+            <label for="earningName">Area of Expence</label>
+            <input type="text" class="form-control" name="expenceName[]" placeholder="Enter Expence Name" required>
         </div>
         <div class="form-group col-md-4">
             <label for="earningAmount">Amount</label>
-            <input type="number" class="form-control" name="earningAmount[]" placeholder="Enter Amount" required>
+            <input type="number" class="form-control" name="expenceAmount[]" placeholder="Enter Amount" required>
         </div>
         <div class="form-group col-md-4">
             <label for="earningMonth">Month</label>
-            <select name="earningMonth[]" class="form-control" required>
+            <select name="expenceMonth[]" class="form-control" required>
                 <option value="">Select a month</option>
                 <option value="1">January</option>
                 <option value="2">February</option>
