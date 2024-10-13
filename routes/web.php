@@ -25,3 +25,17 @@ Route::delete('/deleteearning/{id}', [App\Http\Controllers\Earningexpencecontrol
 //Monthexpence routes
 Route::get('/expence', [App\Http\Controllers\Expencecontroller::class, 'expence'])->name('Expence');
 Route::post('addexpence',[App\Http\Controllers\Expencecontroller::class, 'Addexpence'])->name('Addexpence');
+
+
+
+//Edusectional management routes
+Route::get('/edusection', [App\Http\Controllers\Educationalmanagementcontroller::class, 'Edusection'])->name('Edusection');
+Route::post('addedusection',[App\Http\Controllers\Educationalmanagementcontroller::class, 'Addedusection'])->name('Addedusection');
+
+
+//Sujects of sections
+Route::get('/subjects/{id}', [App\Http\Controllers\EducationalManagementController::class, 'subjects'])->name('subjects');
+
+Route::post('addedusubject/{id}', [App\Http\Controllers\Educationalmanagementcontroller::class, 'Addedusubject'])->name('Addedusubject');
+Route::post('createroadmap', [App\Http\Controllers\Educationalmanagementcontroller::class, 'Createroadmap'])->name('Createroadmap');
+
