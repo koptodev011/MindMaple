@@ -55,26 +55,87 @@ class Educationalmanagementcontroller extends Controller
 
     public function createRoadmap(Request $request)
     {
+
         $request->validate([
-            'roadmap_name.*' => 'required|exists:subjects,id',
+            'subject_id.*' => 'required',
             'start_date.*' => 'required|date',
             'end_date.*' => 'required|date|after:start_date.*',
         ]);
 
-
-        $userId = Auth::id();
-
-        foreach ($request->roadmap_name as $index => $roadmap_name) {
+        foreach ($request->subject_id as $index => $subject_id) {
             Roadmap::create([
-                'subject_id' => $roadmap_name, // Use the value directly from the request
+                'subject_id' => $subject_id,
                 'start_date' => $request->start_date[$index],
                 'end_date' => $request->end_date[$index],
             ]);
         }
 
-        return redirect()->back()->with('success', 'Earnings saved successfully!');
+        return redirect()->back()->with('success', 'Roadmap created successfully!');
     }
 
+
+    public function editsection($id){
+        $editsection = Edusection::findOrFail($id);
+        return view('Educational-Management.editssection', compact('editsection'));
+    }
+
+
+    public function Updatesection(Request $request,$id){
+        $request->validate([
+            'sectionName' => 'required',
+        ]);
+
+        $section = Edusection::findOrFail($id);
+        $section->update([
+            'edusection' => $request->input('sectionName'),
+        ]);
+        return redirect()->route('Edusection')->with('success', 'Section saved successfully!');
+    }
+
+
+    public function Deletesection($id){
+        $section = Edusection::find($id);
+        if ($section) {
+            $section->delete();
+            return redirect()->route('Edusection')->with('success', 'Section deleted successfully.');
+        }
+        return redirect()->route('Edusection')->with('error', 'Section not found.');
+    }
+
+
+    public function editsubject($id){
+
+        $subject = Subject::findOrFail($id);
+        return view('Educational-Management.editsubject', compact('subject'));
+    }
+
+    public function Updatesubject(Request $request,$id){
+        $request->validate([
+            'subjectName' => 'required',
+        ]);
+
+        $subject = Subject::findOrFail($id);
+        $subject->update([
+            'subject_name' => $request->input('subjectName'),
+        ]);
+        return redirect()->route('Edusection')->with('success', 'Section saved successfully!');
+    }
+
+    public function Deletesubject($id){
+        $subject = Subject::find($id);
+
+        if ($subject) {
+            $subject->delete();
+            return redirect()->route('Edusection')->with('success', 'Section deleted successfully.');
+        }
+        return redirect()->route('Edusection')->with('error', 'Section not found.');
+    }
+
+public function viewroadmap(){
+    $roadmap = Roadmap::with('subject')->get();
+   
+    return view('Educational-Management.viewroadmap',compact('roadmap'));
+}
 
 
 

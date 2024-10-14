@@ -79,10 +79,7 @@ display: flex;
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                         Add Section
                     </button>
-                    <button style="margin-left:30px" type="button" class="btn btn-danger" data-toggle="modal"
-                        data-target="#myModal">
-                        Print Roadmap
-                    </button>
+                    
                 </div>
             </nav>
         </div>
@@ -101,8 +98,14 @@ display: flex;
                     </h1>
                 </a>
                 <div class="button-container">
-                    <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
+                    <a href="{{ route('editsection', ['id' => $section->id]) }}" class="btn btn-primary">Edit</a>
+                    <form action="{{ route('Deletesection', $section->id) }}" method="POST"
+                                                        style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button style="margin-left: 20px;" type="submit"
+                                                            class="btn btn-danger btn-sm">Delete</button>
+                                                    </form>
                     <a href="{{ route('subjects', ['id' => $section->id]) }}" class="btn btn-info">View</a>
 
                 </div>

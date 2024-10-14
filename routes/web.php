@@ -32,7 +32,12 @@ Route::delete('/deleteexpence/{id}', [App\Http\Controllers\Expencecontroller::cl
 //Edusectional management routes
 Route::get('/edusection', [App\Http\Controllers\Educationalmanagementcontroller::class, 'Edusection'])->name('Edusection');
 Route::post('addedusection',[App\Http\Controllers\Educationalmanagementcontroller::class, 'Addedusection'])->name('Addedusection');
-
+Route::get('/edit-section/{id}',[App\Http\Controllers\Educationalmanagementcontroller::class, 'editsection'])->name('editsection');
+Route::post('updatesection/{id}',[App\Http\Controllers\Educationalmanagementcontroller::class, 'Updatesection'])->name('Updatesection');
+Route::delete('/deletesection/{id}', [App\Http\Controllers\Educationalmanagementcontroller::class, 'Deletesection'])->name('Deletesection');
+Route::get('/edit-subject/{id}',[App\Http\Controllers\Educationalmanagementcontroller::class, 'editsubject'])->name('editsubject');
+Route::post('updatesubject/{id}',[App\Http\Controllers\Educationalmanagementcontroller::class, 'Updatesubject'])->name('Updatesubject');
+Route::delete('/deletesubject/{id}', [App\Http\Controllers\Educationalmanagementcontroller::class, 'Deletesubject'])->name('Deletesubject');
 
 //Sujects of sections
 Route::get('/subjects/{id}', [App\Http\Controllers\EducationalManagementController::class, 'subjects'])->name('subjects');
@@ -40,3 +45,24 @@ Route::get('/subjects/{id}', [App\Http\Controllers\EducationalManagementControll
 Route::post('addedusubject/{id}', [App\Http\Controllers\Educationalmanagementcontroller::class, 'Addedusubject'])->name('Addedusubject');
 Route::post('createroadmap', [App\Http\Controllers\Educationalmanagementcontroller::class, 'Createroadmap'])->name('Createroadmap');
 
+
+//Investment routes
+Route::get('/Investment', [App\Http\Controllers\investmentcontroller::class, 'investment'])->name('investment');
+Route::post('addinvestment',[App\Http\Controllers\investmentcontroller::class, 'Addinvestment'])->name('Addinvestment');
+Route::get('/edit-investment/{id}',[App\Http\Controllers\investmentcontroller::class, 'editInvestment'])->name('editInvestment');
+Route::post('updateinvestment/{id}',[App\Http\Controllers\investmentcontroller::class, 'Updateinvestment'])->name('Updateinvestment');
+Route::delete('/Deleteinvestment/{id}', [App\Http\Controllers\investmentcontroller::class, 'Deleteinvestment'])->name('Deleteinvestment');
+
+
+
+//View roadmap
+Route::get('/viewroadmap', [App\Http\Controllers\Educationalmanagementcontroller::class, 'viewroadmap'])->name('viewroadmap');
+
+
+
+//Feature plan
+Route::get('/featureplan', [App\Http\Controllers\Educationalmanagementcontroller::class, 'viewroadmap'])->name('viewroadmap');
+
+
+//History routes
+Route::get('/history', [App\Http\Controllers\historycontroller::class, 'viewhistory'])->name('viewhistory');

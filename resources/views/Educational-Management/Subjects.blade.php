@@ -84,9 +84,17 @@
                         </h1>
                     </a>
                     <div class="button-container">
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
-                        <a class="btn btn-info">Upload pdf</a>
+                    <a href="{{ route('editsubject', ['id' => $subject->id]) }}" class="btn btn-primary">Edit</a>
+
+
+                    <form action="{{ route('Deletesubject', $subject->id) }}" method="POST"
+                                                        style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button style="margin-left: 20px;" type="submit"
+                                                            class="btn btn-danger btn-sm">Delete</button>
+                                                    </form>
+
                     </div>
                 </div>
             </div>
@@ -138,68 +146,21 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('Createroadmap') }}" id="roadmapForm" method="POST" novalidate>
-                        @csrf
-                        <div id="formFields">
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="roadmapName" class="font-weight-bold">Subject</label>
-                                        <select class="form-control" name="roadmap_name[]" required>
-                                            <option value="" disabled selected>Select a Subject</option>
-                                            @foreach($subjects as $subject)
-                                            <option value="{{ $subject->id }}">{{ $subject->subject_name }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('roadmap_name.*')
-                                        <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="startDate" class="font-weight-bold">Start Date</label>
-                                        <input type="date" class="form-control" name="start_date[]" required>
-                                        @error('start_date.*')
-                                        <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="endDate" class="font-weight-bold">End Date</label>
-                                        <input type="date" class="form-control" name="end_date[]" required>
-                                        @error('end_date.*')
-                                        <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="button" class="btn btn-primary" id="addMore">Add more</button>
-                        <button type="submit" class="btn btn-danger">Create Roadmap</button>
-                    </form>
-
-                    <script>
-                    document.getElementById('addMore').addEventListener('click', function() {
-                        const formFields = document.getElementById('formFields');
-
-                        const newFields = `
+                <form action="{{ route('Createroadmap') }}" id="roadmapForm" method="POST" novalidate>
+    @csrf
+    <div id="formFields">
         <div class="row mb-3">
             <div class="col">
                 <div class="form-group">
-                    <label for="roadmapName" class="font-weight-bold">Subject</label>
-                    <select class="form-control" name="roadmap_name[]" required>
+                    <label for="subject_id" class="font-weight-bold">Subject</label>
+                    <select class="form-control" name="subject_id[]" required>
                         <option value="" disabled selected>Select a Subject</option>
                         @foreach($subjects as $subject)
                             <option value="{{ $subject->id }}">{{ $subject->subject_name }}</option>
                         @endforeach
                     </select>
-                    @error('roadmap_name.*')
-                    <div class="text-danger">{{ $message }}</div>
+                    @error('subject_id.*')
+                        <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
@@ -209,7 +170,7 @@
                     <label for="startDate" class="font-weight-bold">Start Date</label>
                     <input type="date" class="form-control" name="start_date[]" required>
                     @error('start_date.*')
-                    <div class="text-danger">{{ $message }}</div>
+                        <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
@@ -219,16 +180,64 @@
                     <label for="endDate" class="font-weight-bold">End Date</label>
                     <input type="date" class="form-control" name="end_date[]" required>
                     @error('end_date.*')
-                    <div class="text-danger">{{ $message }}</div>
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" id="addMore">Add more</button>
+    <button type="submit" class="btn btn-danger">Create Roadmap</button>
+</form>
+
+<script>
+document.getElementById('addMore').addEventListener('click', function() {
+    const formFields = document.getElementById('formFields');
+
+    const newFields = `
+        <div class="row mb-3">
+            <div class="col">
+                <div class="form-group">
+                    <label for="subject_id" class="font-weight-bold">Subject</label>
+                    <select class="form-control" name="subject_id[]" required>
+                        <option value="" disabled selected>Select a Subject</option>
+                        @foreach($subjects as $subject)
+                            <option value="{{ $subject->id }}">{{ $subject->subject_name }}</option>
+                        @endforeach
+                    </select>
+                    @error('subject_id.*')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-group">
+                    <label for="startDate" class="font-weight-bold">Start Date</label>
+                    <input type="date" class="form-control" name="start_date[]" required>
+                    @error('start_date.*')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-group">
+                    <label for="endDate" class="font-weight-bold">End Date</label>
+                    <input type="date" class="form-control" name="end_date[]" required>
+                    @error('end_date.*')
+                        <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
         </div>
     `;
 
-                        formFields.insertAdjacentHTML('beforeend', newFields);
-                    });
-                    </script>
+    formFields.insertAdjacentHTML('beforeend', newFields);
+});
+</script>
+
 
 
 

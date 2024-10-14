@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Edusection extends Model
+class Investment extends Model
 {
     use HasFactory;
-    protected $fillable = ['edusection'];
+    protected $fillable = ['investment_area', 'rate_of_interest	', 'amount', 'month', 'period'];
 }

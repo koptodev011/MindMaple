@@ -67,7 +67,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Money Management</h6>
                         <a class="collapse-item" href="{{ route('Earningexpence') }}">EarningExpence</a>
-                        <a class="collapse-item" href="cards.html">Investments</a>
+                        <a class="collapse-item"  href="{{ route('investment') }}">Investments</a>
                     </div>
                 </div>
             </li>
@@ -84,7 +84,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Educational Management</h6>
                         <a class="collapse-item" href="{{ route('Edusection') }}">Educational plan</a>
-                        <a class="collapse-item" href="utilities-border.html">Get todays time table</a>
+                        <a class="collapse-item"href="{{ route('viewroadmap') }}">View Roadmap</a>
 
                     </div>
                 </div>
@@ -109,7 +109,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link"  href="{{ route('viewhistory') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>History</span></a>
             </li>
