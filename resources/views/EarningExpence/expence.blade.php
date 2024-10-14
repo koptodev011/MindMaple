@@ -70,48 +70,45 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Area of expence</th>
-                                            <th>Amount</th>
-                                            <th>Month</th>
-                                            <th>Actions</th> <!-- New column for actions -->
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                        <th>Area of expence</th>
-                                            <th>Amount</th>
-                                            <th>Month</th>
-                                            <th>Actions</th> <!-- New column for actions -->
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        @foreach ($expence as $expence)
-                                        <tr>
-                                            <td>{{ $expence->area_of_expence }}</td>
-                                            <td>{{ $expence->amount }}</td>
-                                            <td>{{ date('F', mktime(0, 0, 0, $expence->month, 1)) }}</td>
-                                            <td>
-                                                <div style="margin-left: 10px;">
-                                                    <a
-                                                        class="btn btn-primary btn-sm">Edit</a>
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Area of expence</th>
+            <th>Amount</th>
+            <th>Month</th>
+            <th>Actions</th> <!-- New column for actions -->
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>Area of expence</th>
+            <th>Amount</th>
+            <th>Month</th>
+            <th>Actions</th> <!-- New column for actions -->
+        </tr>
+    </tfoot>
+    <tbody>
+        @foreach ($expence as $exp)
+        <tr>
+            <td>{{ $exp->area_of_expence }}</td>
+            <td>{{ $exp->amount }}</td>
+            <td>{{ date('F', mktime(0, 0, 0, $exp->month, 1)) }}</td>
+            <td>
+                <div style="margin-left: 10px;">
+                    <a href="{{ route('editExpence', $exp->id) }}" class="btn btn-primary btn-sm">Edit</a>
 
-                                                    <form 
-                                                        method="POST" style="display:inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button style="margin-left: 20px;" type="submit"
-                                                            class="btn btn-danger btn-sm">Delete</button>
-                                                    </form>
+                    <form action="{{ route('Deleteexpence', $exp->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button style="margin-left: 20px;" type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
 
@@ -133,7 +130,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="addEarningLabel">Add Earning</h5>
+                    <h5 class="modal-title" id="addEarningLabel">Add Expence</h5>
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -188,7 +185,7 @@
                         <button type="button" class="btn btn-secondary mb-3" id="addMoreBtn">Add More</button>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save Earnings</button>
+                            <button type="submit" class="btn btn-primary">Save Expence</button>
                         </div>
                     </form>
 

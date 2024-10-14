@@ -71,13 +71,7 @@
 
                                 </li>
                             </ul>
-                            <div class="navbar-nav m">
-                                <li class="nav-item dropdown no-arrow mx-1">
-                                    <button class="btn btn-secondary" data-toggle="modal" data-target="#addEarningModal">
-                                        Search Expence
-                                    </button>
-                                </li>
-                            </div>
+                           
                             <div class="navbar-nav m">
                                 <li class="nav-item dropdown no-arrow mx-1">
                                     <button class="btn btn-primary" data-toggle="modal" data-target="#addEarningModal">

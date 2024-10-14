@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -25,8 +25,9 @@ Route::delete('/deleteearning/{id}', [App\Http\Controllers\Earningexpencecontrol
 //Monthexpence routes
 Route::get('/expence', [App\Http\Controllers\Expencecontroller::class, 'expence'])->name('Expence');
 Route::post('addexpence',[App\Http\Controllers\Expencecontroller::class, 'Addexpence'])->name('Addexpence');
-
-
+Route::get('/edit-expense/{id}',[App\Http\Controllers\Expencecontroller::class, 'editExpence'])->name('editExpence');
+Route::post('updateexpence/{id}',[App\Http\Controllers\Expencecontroller::class, 'Updateexpence'])->name('updateexpence');
+Route::delete('/deleteexpence/{id}', [App\Http\Controllers\Expencecontroller::class, 'Deleteexpence'])->name('Deleteexpence');
 
 //Edusectional management routes
 Route::get('/edusection', [App\Http\Controllers\Educationalmanagementcontroller::class, 'Edusection'])->name('Edusection');

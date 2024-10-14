@@ -57,8 +57,50 @@ class Expencecontroller extends Controller
                 'remaining_amount' => $totalearning - $totalexpence
             ]);
         }
-
-
         return redirect()->back()->with('success', 'Expence saved successfully!');
     }
+
+    public function editExpence($id){
+        $expense = Expence::findOrFail($id);
+           return view('EarningExpence.editexpence',compact('expense'));
+    }
+
+
+    public function updateexpence(Request $request,$id){
+        $request->validate([
+            'area_of_expence' => 'required',
+            'amount' => 'required|numeric',
+            'month_number' => 'required|integer|min:1|max:12'
+        ]);
+
+        $expence = Expence::findOrFail($id);
+        $expence->update([
+            'area_of_expence' => $request->input('area_of_expence'),
+            'amount' => $request->input('amount'),
+            'month' => $request->input('month_number'),
+        ]);
+
+        return redirect()->route('Expence')->with('success', 'Earnings saved successfully!');
+    }
+
+
+    public function Deleteexpence($id){
+        $expence = Expence::find($id);
+        if ($expence) {
+            $expence->delete();
+            return redirect()->route('Expence')->with('success', 'Expence deleted successfully.');
+        }
+        return redirect()->route('Expence')->with('error', 'Expence not found.');
+    }
+
+
+    public function Deleteearning($id) {
+        $earning = Earning::find($id);
+        if ($earning) {
+            $earning->delete();
+            return redirect()->route('Earningexpence')->with('success', 'Earning deleted successfully.');
+        }
+        return redirect()->route('Earningexpence')->with('error', 'Earning not found.');
+    }
+
 }
