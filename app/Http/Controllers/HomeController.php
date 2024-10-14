@@ -25,4 +25,15 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+
+    public function registerpage()
+    {
+        dd("Working");
+        return view('createuser');
+    }
+
+    public function newregister(Request $request){
+     dd();
+    }
 }
