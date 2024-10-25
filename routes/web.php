@@ -11,7 +11,11 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-
+//Profile routes
+Route::get('/profile', [App\Http\Controllers\Profilecontroller::class, 'getprofiledata'])->name('getprofiledata');
+Route::post('updateprofile/{id}',[App\Http\Controllers\Profilecontroller::class, 'Updateprofile'])->name('Updateprofile');
+Route::get('/changePassword', [App\Http\Controllers\Profilecontroller::class, 'changePassword'])->name('changePassword');
+Route::post('/change-password', [App\Http\Controllers\Profilecontroller::class, 'Updatepassword'])->name('Updatepassword');
 
 //Monymanagement routes
 Route::get('/earningexpence', [App\Http\Controllers\Earningexpencecontroller::class, 'Earningexpence'])->name('Earningexpence');
