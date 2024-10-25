@@ -59,8 +59,8 @@
                         <div class="card-header py-3 d-flex justify-content-between align-items-center">
                             <h3 class="m-0 font-weight-bold text-primary">Earnings</h3>
                             <div style="margin-left: 150px; margin-top:10px" class="totalpayment">
-    <h2>Total Earning = {{ $totalearning }}</h2>
-</div>
+                                <h2>Total Earning = {{ $totalearning }}</h2>
+                            </div>
                             <ul class="navbar-nav ml-auto">
                                 <li>
                                     <form action="{{ route('Expence') }}" method="GET">
@@ -71,7 +71,7 @@
 
                                 </li>
                             </ul>
-                           
+
                             <div class="navbar-nav m">
                                 <li class="nav-item dropdown no-arrow mx-1">
                                     <button class="btn btn-primary" data-toggle="modal" data-target="#addEarningModal">

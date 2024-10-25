@@ -66,3 +66,4 @@ Route::get('/featureplan', [App\Http\Controllers\Educationalmanagementcontroller
 
 //History routes
 Route::get('/history', [App\Http\Controllers\historycontroller::class, 'viewhistory'])->name('viewhistory');
+Route::get('/generate-pdf',[App\Http\Controllers\Pdfcontroller::class, 'generatePDF'])->name('generatePDF');

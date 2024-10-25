@@ -10,11 +10,15 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 class Expencecontroller extends Controller
 {
-    public function expence(){
+    public function expence() {
         $userId = Auth::id();
-        $expence=Expence::where('user_id',$userId)->get();
-        return view('Earningexpence.expence',compact('expence'));
+        $expence = Expence::where('user_id', $userId)->get();
+        $currentMonth = now()->format('m');
+        $totalexpence = Payment::where('user_id', $userId)->first();
+
+        return view('Earningexpence.expence', compact('expence', 'totalexpence'));
     }
+
 
     public function Addexpence(Request $request){
         $request->validate([

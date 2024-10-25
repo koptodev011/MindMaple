@@ -56,58 +56,82 @@
                 <div class="container-fluid">
 
                     <div class="card shadow mb-4">
+
                         <div class="card-header py-3 d-flex justify-content-between align-items-center">
+
                             <h3 class="m-0 font-weight-bold text-primary">Expence</h3>
+                            <div style="margin-left: 70px; margin-top: 1px" class="totalpayment">
+    <h2>Remaining Amount = {{ $totalexpence->remaining_amount ?? 0 }}</h2>
+</div>
+
+
+
+
+
+                            <ul class="navbar-nav ml-auto">
+                                <li>
+                                    <form action="{{ route('generatePDF') }}" method="GET">
+                                        <button type="submit" class="btn btn-danger">
+                                            Print Expence
+                                        </button>
+                                    </form>
+
+                                </li>
+                            </ul>
 
                             <div class="navbar-nav m">
                                 <li class="nav-item dropdown no-arrow mx-1">
                                     <button class="btn btn-primary" data-toggle="modal" data-target="#addEarningModal">
-                                        Add Expence
+                                    Add Expence
                                     </button>
                                 </li>
                             </div>
 
+
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-    <thead>
-        <tr>
-            <th>Area of expence</th>
-            <th>Amount</th>
-            <th>Month</th>
-            <th>Actions</th> <!-- New column for actions -->
-        </tr>
-    </thead>
-    <tfoot>
-        <tr>
-            <th>Area of expence</th>
-            <th>Amount</th>
-            <th>Month</th>
-            <th>Actions</th> <!-- New column for actions -->
-        </tr>
-    </tfoot>
-    <tbody>
-        @foreach ($expence as $exp)
-        <tr>
-            <td>{{ $exp->area_of_expence }}</td>
-            <td>{{ $exp->amount }}</td>
-            <td>{{ date('F', mktime(0, 0, 0, $exp->month, 1)) }}</td>
-            <td>
-                <div style="margin-left: 10px;">
-                    <a href="{{ route('editExpence', $exp->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Area of expence</th>
+                                            <th>Amount</th>
+                                            <th>Month</th>
+                                            <th>Actions</th> <!-- New column for actions -->
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Area of expence</th>
+                                            <th>Amount</th>
+                                            <th>Month</th>
+                                            <th>Actions</th> <!-- New column for actions -->
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        @foreach ($expence as $exp)
+                                        <tr>
+                                            <td>{{ $exp->area_of_expence }}</td>
+                                            <td>{{ $exp->amount }}</td>
+                                            <td>{{ date('F', mktime(0, 0, 0, $exp->month, 1)) }}</td>
+                                            <td>
+                                                <div style="margin-left: 10px;">
+                                                    <a href="{{ route('editExpence', $exp->id) }}"
+                                                        class="btn btn-primary btn-sm">Edit</a>
 
-                    <form action="{{ route('Deleteexpence', $exp->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button style="margin-left: 20px;" type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
-                </div>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+                                                    <form action="{{ route('Deleteexpence', $exp->id) }}" method="POST"
+                                                        style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button style="margin-left: 20px;" type="submit"
+                                                            class="btn btn-danger btn-sm">Delete</button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
 
                             </div>
                         </div>

@@ -55,7 +55,6 @@ class Educationalmanagementcontroller extends Controller
 
     public function createRoadmap(Request $request)
     {
-
         $request->validate([
             'subject_id.*' => 'required',
             'start_date.*' => 'required|date',
@@ -133,7 +132,7 @@ class Educationalmanagementcontroller extends Controller
 
 public function viewroadmap(){
     $roadmap = Roadmap::with('subject')->get();
-   
+
     return view('Educational-Management.viewroadmap',compact('roadmap'));
 }
 
